@@ -5,7 +5,20 @@ from list_distance import get_location_ids_total_distance, get_sorted_pairs
 
 def test_get_sorted_pairs_input_must_be_a_str():
     with pytest.raises(TypeError):
-        get_sorted_pairs(45)
+        get_sorted_pairs(2)
+
+
+def test_get_sorted_pairs_returns_correct_pairs():
+    location_ids = """3   4
+4   3
+2   5
+1   3
+3   9
+3   3"""
+
+    pairs = get_sorted_pairs(location_ids)
+
+    assert pairs == ((1, 3), (2, 3), (3, 3), (3, 4), (3, 5), (4, 9))
 
 
 def test_location_ids_must_be_a_str():
