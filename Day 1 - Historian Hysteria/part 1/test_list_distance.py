@@ -1,9 +1,14 @@
 import pytest
 
-from list_distance import get_location_ids_total_distance
+from list_distance import get_location_ids_total_distance, get_sorted_pairs
 
 
-def test_location_ids_not_a_str_must_fail():
+def test_get_sorted_pairs_input_must_be_a_str():
+    with pytest.raises(TypeError):
+        get_sorted_pairs(45)
+
+
+def test_location_ids_must_be_a_str():
     with pytest.raises(TypeError):
         get_location_ids_total_distance(45)
 
