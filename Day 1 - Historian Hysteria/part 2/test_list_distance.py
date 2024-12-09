@@ -3,7 +3,7 @@ import pytest
 from list_distance import (
     get_location_ids_total_distance,
     get_sorted_pairs,
-    get_similarity_score,
+    get_similarity_score, get_ids_count_dict,
 )
 
 
@@ -49,6 +49,11 @@ def test_distance_total_of_one_line_is_correct():
     total_distance = get_location_ids_total_distance(location_ids)
 
     assert total_distance == 5
+
+
+def test_ids_count_dict_location_ids_must_be_a_str():
+    with pytest.raises(TypeError):
+        get_ids_count_dict(45)
 
 
 def test_ids_count_is_correct():

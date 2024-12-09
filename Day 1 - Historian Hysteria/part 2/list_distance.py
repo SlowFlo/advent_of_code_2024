@@ -27,9 +27,16 @@ def get_sorted_pairs(location_ids: str) -> tuple[tuple[int, int], ...]:
     return tuple(zip(first_numbers, second_numbers))
 
 
+def get_ids_count_dict(location_ids: str):
+
+    raise NotImplementedError
+
+
 def get_similarity_score(location_ids: str) -> int:
     if not isinstance(location_ids, str):
         raise TypeError("The location IDs list is not a str")
+
+    ids_count = get_ids_count_dict(location_ids)
 
     return 31
 
