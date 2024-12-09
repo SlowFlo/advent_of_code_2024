@@ -19,3 +19,11 @@ def test_distance_total_is_correct():
     total_distance = get_location_ids_total_distance(location_ids)
 
     assert total_distance == 11
+
+
+def test_distance_total_of_one_line_is_correct():
+    location_ids = "4   9"
+
+    total_distance = get_location_ids_total_distance(location_ids)
+
+    assert total_distance == 5
