@@ -31,7 +31,18 @@ def get_ids_count_dict(location_ids: str):
     if not isinstance(location_ids, str):
         raise TypeError("The location IDs list is not a str")
 
-    raise NotImplementedError
+    ids_count_dict = {"left list": {}, "right list": {}}
+
+    entries = location_ids.splitlines()
+
+    for entry in entries:
+        left, right = map(int, entry.split())
+        ids_count_dict["left list"][left] = ids_count_dict["left list"].get(left, 0) + 1
+        ids_count_dict["right list"][right] = (
+            ids_count_dict["right list"].get(right, 0) + 1
+        )
+
+    return ids_count_dict
 
 
 def get_similarity_score(location_ids: str) -> int:
