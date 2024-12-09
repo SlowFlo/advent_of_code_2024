@@ -56,6 +56,7 @@ def test_ids_count_dict_location_ids_must_be_a_str():
     with pytest.raises(TypeError):
         get_ids_count_dict(45)
 
+
 def test_ids_count_is_correct():
     location_ids = """3   4
     4   3

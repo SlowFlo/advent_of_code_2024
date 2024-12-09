@@ -64,4 +64,8 @@ def get_similarity_score(location_ids: str) -> int:
 
 if __name__ == "__main__":
     with open("puzzle_input.txt") as f:
-        print(get_location_ids_total_distance(f.read()))
+        text = f.read()
+        print(
+            "Total distance between the 2 lists", get_location_ids_total_distance(text)
+        )
+        print("Similarity score of the 2 lists", get_similarity_score(text))
