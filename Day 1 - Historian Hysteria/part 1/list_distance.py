@@ -28,3 +28,8 @@ def get_sorted_pairs(location_ids: str) -> tuple[tuple[int, int], ...]:
     second_numbers.sort()
 
     return tuple(zip(first_numbers, second_numbers))
+
+
+if __name__ == "__main__":
+    with open("puzzle_input.txt") as f:
+        print(get_location_ids_total_distance(f.read()))
