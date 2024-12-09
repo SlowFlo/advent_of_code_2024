@@ -7,9 +7,7 @@ def get_location_ids_total_distance(location_ids: str) -> int:
 
     pairs = get_sorted_pairs(location_ids)
 
-    raise NotImplementedError()
-
-    return 11
+    return sum(abs(pair[0] - pair[1]) for pair in pairs)
 
 
 def get_sorted_pairs(location_ids: str) -> tuple[tuple[int, int], ...]:
