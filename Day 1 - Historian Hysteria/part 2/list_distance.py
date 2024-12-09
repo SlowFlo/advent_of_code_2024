@@ -51,7 +51,15 @@ def get_similarity_score(location_ids: str) -> int:
 
     ids_count = get_ids_count_dict(location_ids)
 
-    return 31
+    score = 0
+    for left_id in ids_count["left list"]:
+        score += (
+            left_id
+            * ids_count["left list"][left_id]
+            * ids_count["right list"].get(left_id, 0)
+        )
+
+    return score
 
 
 if __name__ == "__main__":
