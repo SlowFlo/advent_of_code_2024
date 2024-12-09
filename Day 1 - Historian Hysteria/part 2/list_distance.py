@@ -28,6 +28,8 @@ def get_sorted_pairs(location_ids: str) -> tuple[tuple[int, int], ...]:
 
 
 def get_ids_count_dict(location_ids: str):
+    if not isinstance(location_ids, str):
+        raise TypeError("The location IDs list is not a str")
 
     raise NotImplementedError
 

@@ -3,7 +3,8 @@ import pytest
 from list_distance import (
     get_location_ids_total_distance,
     get_sorted_pairs,
-    get_similarity_score, get_ids_count_dict,
+    get_similarity_score,
+    get_ids_count_dict,
 )
 
 
