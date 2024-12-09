@@ -51,6 +51,22 @@ def test_distance_total_of_one_line_is_correct():
     assert total_distance == 5
 
 
+def test_ids_count_is_correct():
+    location_ids = """3   4
+    4   3
+    2   5
+    1   3
+    3   9
+    3   3"""
+
+    ids_count = get_ids_count_dict(location_ids)
+
+    assert ids_count == {
+        "left list": {1: 1, 2: 1, 3: 3, 4: 1},
+        "right list": {3: 3, 4: 1, 5: 1, 9: 1},
+    }
+
+
 def test_similarity_score_location_ids_must_be_a_str():
     with pytest.raises(TypeError):
         get_similarity_score(3.2)
