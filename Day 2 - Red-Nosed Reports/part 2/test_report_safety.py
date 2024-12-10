@@ -37,7 +37,7 @@ def test_report_decrease_more_than_3_is_unsafe():
     assert is_report_safe(report) == False
 
 
-def test_both_increasing_and_decresaing_is_unsafe():
+def test_both_increasing_and_decreasing_is_unsafe():
     report = "1 3 2 4 2"
 
     assert is_report_safe(report) == False
@@ -66,7 +66,7 @@ def test_nb_safe_reports_is_correct():
 
     nb_safe_reports = get_nb_safe_reports(reports)
 
-    assert nb_safe_reports == 2
+    assert nb_safe_reports == 3
 
 
 if __name__ == "__main__":
