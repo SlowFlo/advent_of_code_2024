@@ -1,33 +1,35 @@
+def is_strictly_increasing(sequence):
+    return all(sequence[i] < sequence[i + 1] for i in range(len(sequence) - 1))
+
+
+def is_strictly_decreasing(sequence):
+    return all(sequence[i] > sequence[i + 1] for i in range(len(sequence) - 1))
+
+
+def is_step_safe(sequence, max_step=3):
+    return all(abs(sequence[i] - sequence[i + 1]) <= max_step for i in range(len(sequence) - 1))
+
+
+def generate_subsequences(sequence):
+    return [sequence[:i] + sequence[i + 1 :] for i in range(len(sequence))]
+
+
 def is_report_safe(report: str) -> bool:
     if not isinstance(report, str):
         raise TypeError("report must be a string")
 
-    levels = list(map(int, report.split()))
-    previous_level = levels[0]
-    previous_is_increasing = None
-    has_problem_dampener_been_activated = False
+    values = list(map(int, report.split()))
 
-    for level in levels[1:]:
-        is_increasing = level > previous_level
-        if previous_is_increasing is not None and previous_is_increasing != is_increasing:
-            if has_problem_dampener_been_activated:
-                return False
-            else:
-                has_problem_dampener_been_activated = True
-                continue
+    # Check if the report is already safe
+    if (is_strictly_increasing(values) or is_strictly_decreasing(values)) and is_step_safe(values):
+        return True
 
-        difference_previous_level = abs(level - previous_level)
-        if difference_previous_level == 0 or difference_previous_level > 3:
-            if has_problem_dampener_been_activated:
-                return False
-            else:
-                has_problem_dampener_been_activated = True
-                continue
+    # Check whether removing one level make it safe
+    for subsequence in generate_subsequences(values):
+        if (is_strictly_increasing(subsequence) or is_strictly_decreasing(subsequence)) and is_step_safe(subsequence):
+            return True
 
-        previous_level = level
-        previous_is_increasing = is_increasing
-
-    return True
+    return False
 
 
 def get_nb_safe_reports(reports: str) -> int:

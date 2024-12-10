@@ -50,6 +50,12 @@ def test_report_become_safe_by_removing_a_decreasing_level():
     assert is_report_safe(report) == True
 
 
+def test_report_become_safe_by_removing_the_first_level():
+    report = "5 1 2 3 4 5"
+
+    assert is_report_safe(report) == True
+
+
 def test_neither_increasing_or_decreasing_is_unsafe():
     report = "8 6 4 4 4 1"
 
@@ -73,6 +79,23 @@ def test_nb_safe_reports_is_correct():
     nb_safe_reports = get_nb_safe_reports(reports)
 
     assert nb_safe_reports == 4
+
+
+def test_edge_cases_are_correct():
+    reports = """48 46 47 49 51 54 56
+1 1 2 3 4 5
+1 2 3 4 5 5
+5 1 2 3 4 5
+1 4 3 2 1
+1 6 7 8 9
+1 2 3 4 3
+9 8 7 6 7
+7 10 8 10 11
+29 28 27 25 26 25 22 20"""
+
+    nb_safe_reports = get_nb_safe_reports(reports)
+
+    assert nb_safe_reports == 10
 
 
 if __name__ == "__main__":
