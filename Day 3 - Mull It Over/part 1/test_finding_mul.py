@@ -16,6 +16,13 @@ def test_find_mul_random_str_return_empty_tuple():
     assert find_mul("??ASDZAFAZ464daa2") == ()
 
 
+def test_find_mul_almost_mul_instruction_str_return_empty_tuple():
+    assert find_mul("mul(4*") == ()
+    assert find_mul("mul(6,9!") == ()
+    assert find_mul("?(12,34)") == ()
+    assert find_mul("mul ( 2 , 4 )") == ()
+
+
 def test_find_and_apply_mul_input_corrupted_memory_is_str():
     with pytest.raises(TypeError):
         find_and_apply_mul(None)
