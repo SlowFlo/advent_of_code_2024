@@ -23,6 +23,10 @@ def test_find_mul_almost_mul_instruction_str_return_empty_tuple():
     assert find_mul("mul ( 2 , 4 )") == ()
 
 
+def test_find_multiple_almost_mul_instruction_str_return_empty_tuple():
+    assert find_mul("%&mul[3,7]!@^do_not_mul(5,5+mul(32,64]then(") == ()
+
+
 def test_find_and_apply_mul_input_corrupted_memory_is_str():
     with pytest.raises(TypeError):
         find_and_apply_mul(None)
