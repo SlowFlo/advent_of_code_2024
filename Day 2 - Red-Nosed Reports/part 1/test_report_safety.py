@@ -1,3 +1,13 @@
+import pytest
+
+from report_safety import get_nb_safe_reports
+
+
+def test_get_nb_safe_reports_reports_is_str():
+    with pytest.raises(TypeError):
+        get_nb_safe_reports(4.9)
+
+
 def test_nb_safe_reports_is_correct():
     reports = """7 6 4 2 1
 1 2 7 8 9

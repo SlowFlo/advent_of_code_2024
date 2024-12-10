@@ -1,3 +1,6 @@
+from typing import Dict, Any
+
+
 def get_location_ids_total_distance(location_ids: str) -> int:
     if not isinstance(location_ids, str):
         raise TypeError("The location IDs list is not a str")
@@ -27,7 +30,7 @@ def get_sorted_pairs(location_ids: str) -> tuple[tuple[int, int], ...]:
     return tuple(zip(first_numbers, second_numbers))
 
 
-def get_ids_count_dict(location_ids: str):
+def get_ids_count_dict(location_ids: str) -> dict[str, dict[int, int]]:
     if not isinstance(location_ids, str):
         raise TypeError("The location IDs list is not a str")
 
