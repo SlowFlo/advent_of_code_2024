@@ -1,11 +1,15 @@
 import pytest
 
-from finding_mul import find_and_apply_mul
+from finding_mul import find_and_apply_mul, find_mul
 
 
 def test_find_mul_input_corrupted_memory_is_str():
     with pytest.raises(TypeError):
         find_mul(45)
+
+
+def test_find_mul_empty_str_return_empty_tuple():
+    assert find_mul("") == ()
 
 
 def test_find_and_apply_mul_input_corrupted_memory_is_str():
