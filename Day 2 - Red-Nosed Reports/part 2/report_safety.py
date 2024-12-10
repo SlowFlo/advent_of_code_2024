@@ -18,7 +18,11 @@ def is_report_safe(report: str) -> bool:
 
         difference_previous_level = abs(level - previous_level)
         if difference_previous_level == 0 or difference_previous_level > 3:
-            return False
+            if has_problem_dampener_been_activated:
+                return False
+            else:
+                has_problem_dampener_been_activated = True
+                continue
 
         previous_level = level
         previous_is_increasing = is_increasing
