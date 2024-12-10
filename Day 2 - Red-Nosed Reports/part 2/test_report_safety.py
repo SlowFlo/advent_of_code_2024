@@ -43,7 +43,7 @@ def test_both_increasing_and_decreasing_is_unsafe():
     assert is_report_safe(report) == False
 
 
-def test_report_become_safe_by_removing_a_level():
+def test_report_become_safe_by_removing_a_decreasing_level():
     # become safe if 3 is removed
     report = "1 3 2 4 5"
 
@@ -51,9 +51,15 @@ def test_report_become_safe_by_removing_a_level():
 
 
 def test_neither_increasing_or_decreasing_is_unsafe():
-    report = "8 6 4 4 1"
+    report = "8 6 4 4 4 1"
 
     assert is_report_safe(report) == False
+
+
+def test_report_become_safe_by_removing_a_level_of_same_value():
+    report = "8 6 4 4 1"
+
+    assert is_report_safe(report) == True
 
 
 def test_nb_safe_reports_is_correct():
@@ -66,7 +72,7 @@ def test_nb_safe_reports_is_correct():
 
     nb_safe_reports = get_nb_safe_reports(reports)
 
-    assert nb_safe_reports == 3
+    assert nb_safe_reports == 4
 
 
 if __name__ == "__main__":
