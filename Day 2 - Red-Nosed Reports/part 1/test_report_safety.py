@@ -37,6 +37,12 @@ def test_both_increasing_and_decresaing_is_unsafe():
     assert is_report_safe(report) == False
 
 
+def test_neither_increasing_or_decreasing_is_unsafe():
+    report = "8 6 4 4 1"
+
+    assert is_report_safe(report) == False
+
+
 def test_nb_safe_reports_is_correct():
     reports = """7 6 4 2 1
 1 2 7 8 9
