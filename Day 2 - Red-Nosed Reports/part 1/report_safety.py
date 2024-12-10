@@ -5,8 +5,9 @@ def is_report_safe(report: str) -> bool:
     levels = list(map(int, report.split()))
     previous_level = levels[0]
     for level in levels[1:]:
-        if level - previous_level > 3:
+        if abs(level - previous_level) > 3:
             return False
+        previous_level = level
 
     return True
 
