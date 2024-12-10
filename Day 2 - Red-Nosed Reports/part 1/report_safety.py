@@ -9,7 +9,8 @@ def is_report_safe(report: str) -> bool:
         is_increasing = True if level - previous_level > 0 else False
         if previous_is_increasing and previous_is_increasing != is_increasing:
             return False
-        if abs(level - previous_level) > 3:
+        difference_previous_level = abs(level - previous_level)
+        if difference_previous_level == 0 or difference_previous_level > 3:
             return False
         previous_level = level
         previous_is_increasing = is_increasing
