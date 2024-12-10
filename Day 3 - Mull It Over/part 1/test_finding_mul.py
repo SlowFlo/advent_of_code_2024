@@ -43,6 +43,10 @@ def test_mul_instruction_1_833_return_tuple_of_1_833():
     assert find_mul("mul(1,833)") == ((1, 833),)
 
 
+def test_mul_with_number_more_than_3_digits_return_empty_tuple():
+    assert find_mul("mul(86,2003)") == ()
+
+
 def test_find_and_apply_mul_input_corrupted_memory_is_str():
     with pytest.raises(TypeError):
         find_and_apply_mul(None)
