@@ -25,6 +25,12 @@ def test_report_increase_more_than_3_is_unsafe():
     assert is_report_safe(report) == False
 
 
+def test_report_decrease_more_than_3_is_unsafe():
+    report = "9 7 6 2 1"
+
+    assert is_report_safe(report) == False
+
+
 def test_nb_safe_reports_is_correct():
     reports = """7 6 4 2 1
 1 2 7 8 9
