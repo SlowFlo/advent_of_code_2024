@@ -2,6 +2,12 @@ def is_report_safe(report: str) -> bool:
     if not isinstance(report, str):
         raise TypeError("report must be a string")
 
+    levels = list(map(int, report.split()))
+    previous_level = levels[0]
+    for level in levels[1:]:
+        if level - previous_level > 3:
+            return False
+
     return True
 
 
