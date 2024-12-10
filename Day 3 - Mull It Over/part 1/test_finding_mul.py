@@ -3,7 +3,12 @@ import pytest
 from finding_mul import find_and_apply_mul
 
 
-def test_find_and_apply_mul_corrupted_memory_is_str():
+def test_find_mul_input_corrupted_memory_is_str():
+    with pytest.raises(TypeError):
+        find_mul(45)
+
+
+def test_find_and_apply_mul_input_corrupted_memory_is_str():
     with pytest.raises(TypeError):
         find_and_apply_mul(None)
 
