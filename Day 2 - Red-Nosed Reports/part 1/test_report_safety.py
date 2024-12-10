@@ -30,3 +30,7 @@ def test_nb_safe_reports_is_correct():
     nb_safe_reports = get_nb_safe_reports(reports)
 
     assert nb_safe_reports == 2
+
+
+if __name__ == "__main__":
+    pytest.main([__file__])
