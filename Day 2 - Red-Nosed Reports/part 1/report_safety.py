@@ -28,4 +28,10 @@ def get_nb_safe_reports(reports: str) -> int:
 
     reports_list = reports.splitlines()
 
-    return 2
+    return sum([is_report_safe(report) for report in reports_list])
+
+
+if __name__ == "__main__":
+    with open("puzzle_input.txt") as f:
+        reports = f.read()
+        print("Number of safe reports:", get_nb_safe_reports(reports))
