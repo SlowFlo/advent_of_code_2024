@@ -31,6 +31,18 @@ def test_mul_instruction_0_0_return_tuple_of_0_0():
     assert find_mul("mul(0,0)") == ((0, 0),)
 
 
+def test_mul_instruction_1_5_return_tuple_of_1_5():
+    assert find_mul("mul(1,5)") == ((1, 5),)
+
+
+def test_mul_instruction_75_8_return_tuple_of_75_8():
+    assert find_mul("mul(75,8)") == ((75, 8),)
+
+
+def test_mul_instruction_1_833_return_tuple_of_1_833():
+    assert find_mul("mul(1,833)") == ((1, 833),)
+
+
 def test_find_and_apply_mul_input_corrupted_memory_is_str():
     with pytest.raises(TypeError):
         find_and_apply_mul(None)
