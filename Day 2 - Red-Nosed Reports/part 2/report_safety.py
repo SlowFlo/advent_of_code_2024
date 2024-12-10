@@ -5,11 +5,16 @@ def is_report_safe(report: str) -> bool:
     levels = list(map(int, report.split()))
     previous_level = levels[0]
     previous_is_increasing = None
+    has_problem_dampener_been_activated = False
 
     for level in levels[1:]:
         is_increasing = level > previous_level
         if previous_is_increasing is not None and previous_is_increasing != is_increasing:
-            return False
+            if has_problem_dampener_been_activated:
+                return False
+            else:
+                has_problem_dampener_been_activated = True
+                continue
 
         difference_previous_level = abs(level - previous_level)
         if difference_previous_level == 0 or difference_previous_level > 3:
