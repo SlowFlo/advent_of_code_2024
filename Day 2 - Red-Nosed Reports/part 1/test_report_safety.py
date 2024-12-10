@@ -13,8 +13,14 @@ def test_is_report_safe_report_is_str():
         is_report_safe(1)
 
 
-def test_gradually_decreasing_report_is_safe():
+def test_report_gradually_decreasing_is_safe():
     report = "7 6 4 2 1"
+
+    assert is_report_safe(report) == True
+
+
+def test_report_gradually_increasing_is_safe():
+    report = "1 3 6 7 9"
 
     assert is_report_safe(report) == True
 
