@@ -4,7 +4,7 @@ def find_mul(corrupted_memory: str):
 
     if corrupted_memory.startswith("mul(") and corrupted_memory.endswith(")"):
         x, y = corrupted_memory.strip("mul()").split(",")
-        if len(x) > 3 or len(y) > 3:
+        if len(x) > 3 or len(y) > 3 or not x.isnumeric() or not y.isnumeric():
             return ()
         else:
             return ((int(x), int(y)),)
