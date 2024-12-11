@@ -55,8 +55,12 @@ def test_mul_with_special_char_return_empty_tuple():
     assert find_all_mul("mul(7!3,3)") == ()
 
 
-def test_mul_with_a_missing_number__return_empty_tuple():
+def test_mul_with_a_missing_number_return_empty_tuple():
     assert find_all_mul("mul(43,)") == ()
+
+
+def test_multiple_mul_operations_return_multiple_tuples():
+    assert find_all_mul("mul(43,4)mul(564,0)") == ((43, 4), (564, 0))
 
 
 def test_find_and_apply_mul_input_corrupted_memory_is_str():

@@ -2,7 +2,7 @@ def is_mul_inputs_valid(x: str, y: str) -> bool:
     return len(x) <= 3 and len(y) <= 3 and x.isnumeric() and y.isnumeric()
 
 
-def find_all_mul(corrupted_memory: str):
+def find_all_mul(corrupted_memory: str) -> tuple[tuple[int, int], ...]:
     if not isinstance(corrupted_memory, str):
         raise TypeError("Corrupted memory must be a string")
 
