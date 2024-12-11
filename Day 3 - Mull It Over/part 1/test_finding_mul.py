@@ -63,6 +63,10 @@ def test_multiple_mul_operations_return_multiple_tuples():
     assert find_all_mul("mul(43,4)mul(564,0)") == ((43, 4), (564, 0))
 
 
+def test_multiple_mul_operations_with_partial_operation_between_return_multiple_tuples():
+    assert find_all_mul("mul(1,222)afazey12mul(AZZmul(3,8)") == ((1, 222), (3, 8))
+
+
 def test_find_and_apply_mul_input_corrupted_memory_is_str():
     with pytest.raises(TypeError):
         find_and_apply_mul(None)
