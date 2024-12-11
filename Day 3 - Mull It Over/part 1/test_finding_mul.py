@@ -47,6 +47,10 @@ def test_mul_with_number_more_than_3_digits_return_empty_tuple():
     assert find_mul("mul(86,2003)") == ()
 
 
+def test_mul_with_minus_char_return_empty_tuple():
+    assert find_mul("mul(-7,3)") == ()
+
+
 def test_find_and_apply_mul_input_corrupted_memory_is_str():
     with pytest.raises(TypeError):
         find_and_apply_mul(None)
