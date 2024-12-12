@@ -96,5 +96,13 @@ def test_find_and_apply_mul_is_correct():
     assert total == 161
 
 
+def test_find_and_apply_mul_with_do_and_don_t_is_correct():
+    corrupted_memory = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
+
+    total = find_and_apply_mul(corrupted_memory)
+
+    assert total == 48
+
+
 if __name__ == "__main__":
     pytest.main([__file__])
