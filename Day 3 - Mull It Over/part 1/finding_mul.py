@@ -1,4 +1,5 @@
 import re
+import time
 
 
 def find_all_mul(corrupted_memory: str) -> tuple[tuple[int, int], ...]:
@@ -23,4 +24,19 @@ def find_and_apply_mul(corrupted_memory: str) -> int:
 
     mul_operations = find_all_mul(corrupted_memory)
 
-    return 161
+    total = 0
+    for mul in mul_operations:
+        total += mul[0] * mul[1]
+
+    return total
+
+
+if __name__ == "__main__":
+    start_time = time.time()
+    with open("puzzle_input.txt") as f:
+        reports = f.read()
+        print("Sum of all mul operations:", find_and_apply_mul(reports))
+
+    end_time = time.time()
+    execution_time = end_time - start_time
+    print(f"Execution time: {execution_time:.6f} seconds")
