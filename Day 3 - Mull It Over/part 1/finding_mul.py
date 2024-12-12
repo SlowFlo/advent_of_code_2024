@@ -10,7 +10,10 @@ def find_all_mul(corrupted_memory: str) -> tuple[tuple[int, int], ...]:
     if mul_operation_start_idx == -1:
         mul_operation_end_idx = -1
     else:
+        next_mul_operation = corrupted_memory.find("mul(", mul_operation_start_idx + 1)
         mul_operation_end_idx = corrupted_memory.find(")", mul_operation_start_idx)
+        if next_mul_operation != -1 and next_mul_operation < mul_operation_end_idx:
+            mul_operation_start_idx = next_mul_operation
 
     mul_operations = []
 
@@ -23,7 +26,10 @@ def find_all_mul(corrupted_memory: str) -> tuple[tuple[int, int], ...]:
         if mul_operation_start_idx == -1:
             mul_operation_end_idx = -1
         else:
+            next_mul_operation = corrupted_memory.find("mul(", mul_operation_start_idx + 1)
             mul_operation_end_idx = corrupted_memory.find(")", mul_operation_start_idx)
+            if next_mul_operation != -1 and next_mul_operation < mul_operation_end_idx:
+                mul_operation_start_idx = next_mul_operation
 
     return tuple(mul_operations)
 
