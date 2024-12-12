@@ -59,6 +59,22 @@ def test_mul_with_a_missing_number_return_empty_tuple():
     assert find_all_mul("mul(43,)") == ()
 
 
+def test_mul_with_leading_comma_return_empty_tuple():
+    assert find_all_mul("mul(,45)") == ()
+
+
+def test_mul_with_comma_and_no_arguments_return_empty_tuple():
+    assert find_all_mul("mul(,)") == ()
+
+
+def test_mul_with_space_after_comma_return_empty_tuple():
+    assert find_all_mul("mul(12, )") == ()
+
+
+def test_mul_with_spaces_return_empty_tuple():
+    assert find_all_mul("mul( 12 , 333 )") == ()
+
+
 def test_multiple_mul_operations_return_multiple_tuples():
     assert find_all_mul("mul(43,4)mul(564,0)") == ((43, 4), (564, 0))
 
