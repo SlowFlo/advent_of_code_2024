@@ -79,6 +79,22 @@ def test_multiple_mul_operations_return_multiple_tuples():
     assert find_all_mul("mul(43,4)mul(564,0)") == ((43, 4), (564, 0))
 
 
+def test_multiple_mul_operations_with_do_is_correct():
+    assert find_all_mul("do()mul(43,4)mul(564,0)") == ((43, 4), (564, 0))
+
+
+def test_multiple_mul_operations_with_don_t_is_correct():
+    assert find_all_mul("don't()mul(43,4)mul(564,0)") == ()
+
+
+def test_multiple_mul_operations_with_don_t_between_is_correct():
+    assert find_all_mul("mul(43,4)don't()mul(564,0)") == ((43, 4),)
+
+
+def test_multiple_mul_operations_with_don_t_then_do_is_correct():
+    assert find_all_mul("don't()mul(43,4)do()mul(564,0)") == ((564, 0),)
+
+
 def test_multiple_mul_operations_with_partial_operation_between_return_multiple_tuples():
     assert find_all_mul("mul(1,222)afazey12mul(AZZmul(3,8)") == ((1, 222), (3, 8))
 
