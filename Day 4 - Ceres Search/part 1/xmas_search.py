@@ -8,7 +8,7 @@ def find_number_of_xmas(letters_grid: str) -> int:
     if not letters_grid.strip():
         return 0
 
-    return 1
+    return letters_grid.count("XMAS")
 
 
 if __name__ == "__main__":
