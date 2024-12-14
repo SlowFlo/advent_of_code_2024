@@ -32,6 +32,10 @@ def test_1_line_with_2_reversed_xmas():
     assert find_number_of_xmas("DZSAMX45GUVSAMXTCTC") == 2
 
 
+def test_1_line_with_both_normal_and_reversed_xmas():
+    assert find_number_of_xmas("DZXMAS45GUVSAMXTCTC") == 2
+
+
 def test_find_number_of_xmas_use_case_is_ok():
     letters_grid = """MMMSXXMASM
 MSAMXMSMSA
