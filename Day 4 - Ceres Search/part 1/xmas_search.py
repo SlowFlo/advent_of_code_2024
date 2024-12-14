@@ -23,6 +23,10 @@ def lines_to_diagonals(text: str) -> str:
     return result
 
 
+def count_xmas_in_lines(grid: str) -> int:
+    return grid.count("XMAS") + grid[::-1].count("XMAS")
+
+
 def find_number_of_xmas(letters_grid: str) -> int:
     if not isinstance(letters_grid, str):
         raise TypeError("letters_grid must be a string")
@@ -30,20 +34,16 @@ def find_number_of_xmas(letters_grid: str) -> int:
     if not letters_grid.strip():
         return 0
 
-    reversed_grid = lines_to_columns(letters_grid)
+    transposed_grid = lines_to_columns(letters_grid)
     diagonals = lines_to_diagonals(letters_grid)
     reversed_lines = "\n".join([line[::-1] for line in letters_grid.splitlines()])
     reversed_diagonals = lines_to_diagonals(reversed_lines)
 
     return (
-        letters_grid.count("XMAS")
-        + letters_grid[::-1].count("XMAS")
-        + diagonals.count("XMAS")
-        + diagonals[::-1].count("XMAS")
-        + reversed_grid.count("XMAS")
-        + reversed_grid[::-1].count("XMAS")
-        + reversed_diagonals.count("XMAS")
-        + reversed_diagonals[::-1].count("XMAS")
+        count_xmas_in_lines(letters_grid)
+        + count_xmas_in_lines(diagonals)
+        + count_xmas_in_lines(transposed_grid)
+        + count_xmas_in_lines(reversed_diagonals)
     )
 
 
