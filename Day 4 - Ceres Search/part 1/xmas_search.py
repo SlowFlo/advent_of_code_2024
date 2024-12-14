@@ -1,6 +1,13 @@
 import time
 
 
+def lines_to_columns(texte: str) -> str:
+    lignes = texte.splitlines()
+    # We group each Nth letter of each line together
+    colonnes = zip(*lignes)
+    return "\n".join("".join(colonne) for colonne in colonnes)
+
+
 def find_number_of_xmas(letters_grid: str) -> int:
     if not isinstance(letters_grid, str):
         raise TypeError("letters_grid must be a string")
@@ -8,7 +15,14 @@ def find_number_of_xmas(letters_grid: str) -> int:
     if not letters_grid.strip():
         return 0
 
-    return letters_grid.count("XMAS") + letters_grid[::-1].count("XMAS")
+    reversed_grid = lines_to_columns(letters_grid)
+
+    return (
+        letters_grid.count("XMAS")
+        + letters_grid[::-1].count("XMAS")
+        + reversed_grid.count("XMAS")
+        + reversed_grid[::-1].count("XMAS")
+    )
 
 
 if __name__ == "__main__":

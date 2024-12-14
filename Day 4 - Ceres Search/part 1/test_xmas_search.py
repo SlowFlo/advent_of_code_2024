@@ -99,6 +99,7 @@ S
 A
 M
 X"""
+
     assert find_number_of_xmas(column) == 2
 
 
