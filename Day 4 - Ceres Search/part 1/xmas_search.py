@@ -5,6 +5,9 @@ def find_number_of_xmas(letters_grid: str) -> int:
     if not isinstance(letters_grid, str):
         raise TypeError("letters_grid must be a string")
 
+    if not letters_grid.strip():
+        return 0
+
     return 1
 
 
