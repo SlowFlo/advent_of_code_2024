@@ -99,7 +99,7 @@ S
 A
 M
 X"""
-    assert find_number_of_xmas("DZXMAS45GUVSAMXTCTC") == 2
+    assert find_number_of_xmas(column) == 2
 
 
 def test_find_number_of_xmas_use_case_is_ok():
