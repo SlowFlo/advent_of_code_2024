@@ -117,11 +117,11 @@ def test_lines_to_diagonals():
 DEF
 GHI"""
 
-    expected_diagonals = """G
-DH
-AEI
-BF
-C"""
+    expected_diagonals = """A
+DB
+GEC
+HF
+I"""
 
     assert lines_to_diagonals(grid) == expected_diagonals
 
