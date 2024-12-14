@@ -12,7 +12,11 @@ def test_empty_str_no_xmas():
     assert find_number_of_xmas("") == 0
 
 
-def test_one_line_with_xmas():
+def test_1_line_no_xmas():
+    assert find_number_of_xmas("AZERTY") == 0
+
+
+def test_1_line_with_xmas():
     assert find_number_of_xmas("XMAS") == 1
 
 
