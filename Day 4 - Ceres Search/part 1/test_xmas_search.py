@@ -1,6 +1,6 @@
 import pytest
 
-from xmas_search import find_number_of_xmas
+from xmas_search import find_number_of_xmas, lines_to_diagonals
 
 
 def test_find_number_of_xmas_input_grid_is_str():
@@ -110,6 +110,20 @@ def test_1_diagonal_with_1_xmas():
 ...S"""
 
     assert find_number_of_xmas(column) == 1
+
+
+def test_lines_to_diagonals():
+    grid = """ABC
+DEF
+GHI"""
+
+    expected_diagonals = """G
+DH
+AEI
+BF
+C"""
+
+    assert lines_to_diagonals(grid) == expected_diagonals
 
 
 def test_find_number_of_xmas_use_case_is_ok():
