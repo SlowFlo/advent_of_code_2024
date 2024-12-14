@@ -18,34 +18,27 @@ def find_mul_in_substring(part_of_corrupted_memory: str) -> tuple[tuple[int, int
     return tuple(result)
 
 
-def find_all_mul(memory: str) -> tuple[tuple[int, int], ...]:
-    """
-    Trouve toutes les instructions valides `mul(...)` dans une chaîne.
-    - Les sections avant `don't()` sont analysées.
-    - Les sections après un `do()` sont analysées.
-    - Les sections entre un `do()` et un `don't()` sont analysées.
-    """
-    if not isinstance(memory, str):
-        raise TypeError("Memory must be a string")
-
-    # Trouver toutes les instructions `do()` et `don't()` et leurs positions
+def find_valid_substrings(memory: str) -> list[str]:
+    # We keep the instruction in the result with the regex group selector ()
     sections = re.split(r"(don't\(\)|do\(\))", memory)
-
     valid_substrings = []
-    is_valid = True  # Indique si la section actuelle est valide
+    is_valid = True
 
     for section in sections:
         if section == "don't()":
-            is_valid = False  # Désactiver l'analyse après un `don't()`
+            is_valid = False
         elif section == "do()":
-            is_valid = True  # Réactiver l'analyse après un `do()`
+            is_valid = True
         elif is_valid:
-            valid_substrings.append(section)  # Ajouter la partie valide pour analyse
+            valid_substrings.append(section)
 
-    # Analyser chaque sous-chaîne valide avec la fonction donnée
-    results = []
-    for substring in valid_substrings:
-        results.extend(find_mul_in_substring(substring))
+    return valid_substrings
+
+
+def find_all_mul(memory: str) -> tuple[tuple[int, int], ...]:
+    valid_substrings = find_valid_substrings(memory)
+
+    results = [mul for substring in valid_substrings for mul in find_mul_in_substring(substring)]
 
     return tuple(results)
 
