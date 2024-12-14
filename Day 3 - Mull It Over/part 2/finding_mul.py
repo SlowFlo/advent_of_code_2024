@@ -59,8 +59,8 @@ def find_and_apply_mul(corrupted_memory: str) -> int:
 if __name__ == "__main__":
     start_time = time.time()
     with open("puzzle_input.txt") as f:
-        reports = f.read()
-        print("Sum of all mul operations:", find_and_apply_mul(reports))
+        corrupted_memory = f.read()
+        print("Sum of all mul operations:", find_and_apply_mul(corrupted_memory))
 
     end_time = time.time()
     execution_time = end_time - start_time
