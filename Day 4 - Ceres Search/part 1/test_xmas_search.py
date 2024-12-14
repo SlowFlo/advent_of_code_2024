@@ -16,8 +16,12 @@ def test_1_line_no_xmas():
     assert find_number_of_xmas("AZERTY") == 0
 
 
-def test_1_line_with_xmas():
+def test_1_line_with_1_xmas():
     assert find_number_of_xmas("XMAS") == 1
+
+
+def test_1_line_with_2_xmas():
+    assert find_number_of_xmas("ZQDQZXMASerzQDZXMASZQD") == 2
 
 
 def test_find_number_of_xmas_use_case_is_ok():
