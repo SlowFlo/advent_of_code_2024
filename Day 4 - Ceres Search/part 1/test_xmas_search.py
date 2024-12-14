@@ -8,6 +8,10 @@ def test_find_number_of_xmas_input_grid_is_str():
         find_number_of_xmas(45)
 
 
+def test_one_line_xmas():
+    assert find_number_of_xmas("XMAS") == 1
+
+
 def test_find_number_of_xmas_use_case_is_ok():
     letters_grid = """MMMSXXMASM
 MSAMXMSMSA
