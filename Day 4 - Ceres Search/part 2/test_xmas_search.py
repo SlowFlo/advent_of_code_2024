@@ -24,6 +24,14 @@ M.S"""
     assert find_number_of_x_mas(column) == 1
 
 
+def test_2_overlapping_x_mas():
+    column = """MSMS
+.AA.
+SMSM"""
+
+    assert find_number_of_x_mas(column) == 2
+
+
 def test_find_number_of_x_mas_use_case_is_ok():
     letters_grid = """MMMSXXMASM
 MSAMXMSMSA
