@@ -36,6 +36,72 @@ def test_1_line_with_both_normal_and_reversed_xmas():
     assert find_number_of_xmas("DZXMAS45GUVSAMXTCTC") == 2
 
 
+def test_1_column_with_1_xmas():
+    column = """X
+M
+A
+S"""
+
+    assert find_number_of_xmas(column) == 1
+
+
+def test_1_column_with_2_xmas():
+    column = """2
+X
+M
+A
+S
+Z
+D
+X
+M
+A
+S
+d
+T
+"""
+
+    assert find_number_of_xmas(column) == 2
+
+
+def test_1_column_with_1_reversed_xmas():
+    column = """S
+A
+M
+X"""
+
+    assert find_number_of_xmas(column) == 1
+
+
+def test_1_column_with_2_reversed_xmas():
+    column = """E
+R
+S
+A
+M
+X
+S
+A
+M
+X"""
+
+    assert find_number_of_xmas(column) == 2
+
+
+def test_1_column_with_both_normal_and_reversed_xmas():
+    column = """E
+    
+X
+M
+A
+S
+S
+A
+M
+X"""
+    assert find_number_of_xmas("DZXMAS45GUVSAMXTCTC") == 2
+
+
 def test_find_number_of_xmas_use_case_is_ok():
     letters_grid = """MMMSXXMASM
 MSAMXMSMSA
