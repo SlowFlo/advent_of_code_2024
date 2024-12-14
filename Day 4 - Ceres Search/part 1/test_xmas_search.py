@@ -103,6 +103,15 @@ X"""
     assert find_number_of_xmas(column) == 2
 
 
+def test_1_diagonal_with_1_xmas():
+    column = """X...
+.M..
+..A.
+...S"""
+
+    assert find_number_of_xmas(column) == 1
+
+
 def test_find_number_of_xmas_use_case_is_ok():
     letters_grid = """MMMSXXMASM
 MSAMXMSMSA
