@@ -40,6 +40,13 @@ def test_get_dict_ordering_rules_of_1_correct_rule_return_correct_dict():
     assert get_dict_ordering_rules("47|53") == {47: (53,)}
 
 
+def test_get_dict_ordering_rules_of_2_correct_rules_different_first_number_return_correct_dict():
+    rules = """47|53
+97|13"""
+
+    assert get_dict_ordering_rules(rules) == {47: (53,), 97: (13,)}
+
+
 def test_use_case():
     rules_and_updates = """47|53
 97|13
