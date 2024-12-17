@@ -1,9 +1,15 @@
+import re
+
+
 def get_dict_ordering_rules(ordering_rules: str) -> dict:
     if not isinstance(ordering_rules, str):
         raise TypeError("The rules must be a string")
 
     if not ordering_rules.strip():
         return {}
+
+    if not re.fullmatch(r"\d{2}\|\d{2}", ordering_rules):
+        raise ValueError("The rules must be a string")
 
 
 def get_correctly_ordered_updates(ordering_rules: str, updates: str):
