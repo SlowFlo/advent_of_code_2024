@@ -8,10 +8,14 @@ def get_dict_ordering_rules(ordering_rules: str) -> dict[int, tuple[int]]:
     if not ordering_rules.strip():
         return {}
 
-    if not (match := re.fullmatch(r"(\d{2})\|(\d{2})", ordering_rules)):
-        raise ValueError("The rules must be a string")
+    dict_ordering_rules = {}
+    for rule in ordering_rules.splitlines():
+        if not (match := re.match(r"(\d{2})\|(\d{2})", rule)):
+            raise ValueError(f"The rules must be of format XX|XX, got : {rule}")
 
-    return {int(match.group(1)): (int(match.group(2)),)}
+        dict_ordering_rules[int(match.group(1))] = (int(match.group(2)),)
+
+    return dict_ordering_rules
 
 
 def get_correctly_ordered_updates(ordering_rules: str, updates: str):
