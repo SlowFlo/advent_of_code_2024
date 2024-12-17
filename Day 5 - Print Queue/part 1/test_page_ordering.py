@@ -31,6 +31,11 @@ def test_get_dict_ordering_rules_of_empty_rules_return_empty_dict():
     assert get_dict_ordering_rules("\t") == {}
 
 
+def test_get_dict_ordering_rules_of_1_incorrect_rule_return_value_error():
+    with pytest.raises(ValueError):
+        get_dict_ordering_rules("47/53")
+
+
 def test_use_case():
     rules_and_updates = """47|53
 97|13
