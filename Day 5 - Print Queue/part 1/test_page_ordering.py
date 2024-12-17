@@ -27,6 +27,10 @@ def test_get_dict_ordering_rules_input_ordering_rules_is_str():
         get_dict_ordering_rules(None)
 
 
+def test_get_dict_ordering_rules_of_empty_rules_return_empty_dict():
+    assert get_dict_ordering_rules("") == {}
+
+
 def test_use_case():
     rules_and_updates = """47|53
 97|13
