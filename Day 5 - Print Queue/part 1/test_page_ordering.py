@@ -38,9 +38,7 @@ def test_use_case():
 61,13,29
 97,13,75,29,47"""
 
-    sum_correct_updates_middle_pages = test_get_sum_middle_pages_of_correctly_ordered_updates_input_is_str(
-        rules_and_updates
-    )
+    sum_correct_updates_middle_pages = get_sum_middle_pages_of_correctly_ordered_updates(rules_and_updates)
     assert sum_correct_updates_middle_pages == 143
 
 
