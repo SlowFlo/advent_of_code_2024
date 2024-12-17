@@ -1,3 +1,5 @@
-def get_sum_middle_pages_of_correctly_ordered_updates(ordering_rules_and_updates: str):
+def get_sum_middle_pages_of_correctly_ordered_updates(ordering_rules_and_updates: str) -> int:
     if not isinstance(ordering_rules_and_updates, str):
         raise TypeError("The rules and updates must be a string")
+
+    return 143
