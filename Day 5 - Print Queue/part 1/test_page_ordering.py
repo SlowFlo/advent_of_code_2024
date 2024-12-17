@@ -28,7 +28,7 @@ def test_get_dict_ordering_rules_input_ordering_rules_is_str():
 
 
 def test_get_dict_ordering_rules_of_empty_rules_return_empty_dict():
-    assert get_dict_ordering_rules("") == {}
+    assert get_dict_ordering_rules("\t") == {}
 
 
 def test_use_case():
