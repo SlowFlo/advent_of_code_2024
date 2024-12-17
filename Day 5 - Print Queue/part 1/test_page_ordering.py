@@ -1,6 +1,10 @@
 import pytest
 
-from page_ordering import get_sum_middle_pages_of_correctly_ordered_updates, get_correctly_ordered_updates
+from page_ordering import (
+    get_sum_middle_pages_of_correctly_ordered_updates,
+    get_correctly_ordered_updates,
+    get_dict_ordering_rules,
+)
 
 
 def test_get_sum_middle_pages_of_correctly_ordered_updates_input_is_str():
@@ -16,6 +20,11 @@ def test_get_correctly_ordered_updates_input_ordering_rules_is_str():
 def test_get_correctly_ordered_updates_input_updates_is_str():
     with pytest.raises(TypeError):
         get_correctly_ordered_updates("zersq", 12)
+
+
+def test_get_dict_ordering_rules_input_ordering_rules_is_str():
+    with pytest.raises(TypeError):
+        get_dict_ordering_rules(None)
 
 
 def test_use_case():
