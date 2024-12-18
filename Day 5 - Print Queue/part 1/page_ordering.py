@@ -1,4 +1,5 @@
 import re
+import time
 
 
 def get_dict_ordering_rules(ordering_rules: str) -> dict[int, tuple[int]]:
@@ -37,3 +38,17 @@ def get_sum_middle_pages_of_correctly_ordered_updates(ordering_rules_and_updates
     correctly_ordered_updates = get_correctly_ordered_updates(ordering_rules, updates)
 
     return 143
+
+
+if __name__ == "__main__":
+    start_time = time.time()
+    with open("puzzle_input.txt") as f:
+        letters_grid = f.read()
+        print(
+            "Sum of the correct updates middle pages numbers:",
+            get_sum_middle_pages_of_correctly_ordered_updates(letters_grid),
+        )
+
+    end_time = time.time()
+    execution_time = end_time - start_time
+    print(f"Execution time: {execution_time:.6f} seconds")
