@@ -14,7 +14,9 @@ def get_dict_ordering_rules(ordering_rules: str) -> dict[int, tuple[int]]:
         if not (match := re.match(r"(\d{2})\|(\d{2})", rule)):
             raise ValueError(f"The rules must be of format XX|XX, got : {rule}")
 
-        dict_ordering_rules[int(match.group(1))] = (int(match.group(2)),)
+        dict_ordering_rules[int(match.group(1))] = dict_ordering_rules.get(int(match.group(1)), ()) + (
+            int(match.group(2)),
+        )
 
     return dict_ordering_rules
 
