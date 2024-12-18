@@ -54,6 +54,39 @@ def test_get_dict_ordering_rules_of_2_correct_rules_same_first_number_return_cor
     assert get_dict_ordering_rules(rules) == {47: (53, 56)}
 
 
+def test_use_case_dict_rules_is_correct():
+    rules = """47|53
+97|13
+97|61
+97|47
+75|29
+61|13
+75|53
+29|13
+97|29
+53|29
+61|53
+97|53
+61|29
+47|13
+75|47
+97|75
+47|61
+75|61
+47|29
+75|13
+53|13"""
+
+    assert get_dict_ordering_rules(rules) == {
+        29: (13,),
+        47: (53, 13, 61, 29),
+        53: (29, 13),
+        61: (13, 53, 29),
+        75: (29, 53, 47, 61, 13),
+        97: (13, 61, 47, 29, 53, 75),
+    }
+
+
 def test_use_case():
     rules_and_updates = """47|53
 97|13
