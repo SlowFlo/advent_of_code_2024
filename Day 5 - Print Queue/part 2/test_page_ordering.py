@@ -1,7 +1,7 @@
 import pytest
 
 from page_ordering import (
-    get_sum_middle_pages_of_correctly_ordered_updates,
+    get_sum_middle_pages_of_correctly_and_incorrectly_ordered_updates,
     get_correctly_ordered_updates,
     get_dict_ordering_rules,
     filter_correct_updates,
@@ -10,7 +10,7 @@ from page_ordering import (
 
 def test_get_sum_middle_pages_of_correctly_ordered_updates_input_is_str():
     with pytest.raises(TypeError):
-        get_sum_middle_pages_of_correctly_ordered_updates(45)
+        get_sum_middle_pages_of_correctly_and_incorrectly_ordered_updates(45)
 
 
 def test_get_correctly_ordered_updates_input_ordering_rules_is_str():
@@ -160,8 +160,10 @@ def test_use_case():
 61,13,29
 97,13,75,29,47"""
 
-    sum_correct_updates_middle_pages = get_sum_middle_pages_of_correctly_ordered_updates(rules_and_updates)
-    assert sum_correct_updates_middle_pages == 143
+    sum_correct_updates_middle_pages = get_sum_middle_pages_of_correctly_and_incorrectly_ordered_updates(
+        rules_and_updates
+    )
+    assert sum_correct_updates_middle_pages == (143, 123)
 
 
 if __name__ == "__main__":
