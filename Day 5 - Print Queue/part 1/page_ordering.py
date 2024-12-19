@@ -36,9 +36,8 @@ def filter_correct_updates(updates: str, dict_ordering_rules: dict[int, tuple[in
     seen_pages = []
     for page_number in update:
         rules = dict_ordering_rules.get(page_number, ())
-        for must_be_before_page in rules:
-            if must_be_before_page in seen_pages:
-                return ()
+        if any(must_be_before_page in seen_pages for must_be_before_page in rules):
+            return ()
 
         seen_pages.append(page_number)
 
