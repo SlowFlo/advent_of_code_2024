@@ -2,67 +2,79 @@ import pytest
 
 from page_ordering import (
     get_sum_middle_pages_of_correctly_and_incorrectly_ordered_updates,
-    get_correctly_ordered_updates,
+    get_correctly_and_incorrectly_ordered_updates,
     get_dict_ordering_rules,
-    filter_correct_updates,
+    filter_correct_and_incorrect_updates,
 )
 
 
-def test_get_sum_middle_pages_of_correctly_ordered_updates_input_is_str():
+def test_get_sum_middle_pages_of_correctly_and_incorrectly_ordered_updates_input_is_str():
     with pytest.raises(TypeError):
         get_sum_middle_pages_of_correctly_and_incorrectly_ordered_updates(45)
 
 
-def test_get_correctly_ordered_updates_input_ordering_rules_is_str():
+def test_get_correctly_and_incorrectly_ordered_updates_updates_input_ordering_rules_is_str():
     with pytest.raises(TypeError):
-        get_correctly_ordered_updates(None, "aaa")
+        get_correctly_and_incorrectly_ordered_updates(None, "aaa")
 
 
-def test_get_correctly_ordered_updates_input_updates_is_str():
+def test_get_correctly_and_incorrectly_ordered_updates_updates_input_updates_is_str():
     with pytest.raises(TypeError):
-        get_correctly_ordered_updates("zersq", 12)
+        get_correctly_and_incorrectly_ordered_updates("zersq", 12)
 
 
-def test_filter_correct_updates_input_updates_is_str():
+def test_filter_correct_and_incorrect_updates_input_updates_is_str():
     with pytest.raises(TypeError):
-        filter_correct_updates(1.2, "dszqf")
+        filter_correct_and_incorrect_updates(1.2, "dszqf")
 
 
-def test_filter_correct_updates_input_dict_ordering_rules_is_dict():
+def test_filter_correct_and_incorrect_updates_input_dict_ordering_rules_is_dict():
     with pytest.raises(TypeError):
-        filter_correct_updates("1.2", "dszqf")
+        filter_correct_and_incorrect_updates("1.2", "dszqf")
 
 
-def test_filter_correct_updates_empty_inputs_return_empty_tuple():
-    assert filter_correct_updates("", {}) == ()
+def test_filter_correct_and_incorrect_updates_empty_inputs_return_empty_tuple():
+    assert filter_correct_and_incorrect_updates("", {}) == ()
 
 
-def test_filter_correct_updates_wrong_update_return_empty_tuple():
-    assert filter_correct_updates("11,10", {10: (11,)}) == ()
+def test_filter_correct_and_incorrect_updates_wrong_update_return_empty_tuple():
+    assert filter_correct_and_incorrect_updates("11,10", {10: (11,)}) == {"correct": (), "incorrect": ((10, 11),)}
 
 
-def test_filter_correct_updates_correct_update_returned_in_tuple():
-    assert filter_correct_updates("10,11", {10: (11,)}) == ((10, 11),)
+def test_filter_correct_and_incorrect_updates_correct_update_returned_in_tuple():
+    assert filter_correct_and_incorrect_updates("10,11", {10: (11,)}) == {"correct": ((10, 11),), "incorrect": ()}
 
 
 def test_filter_1_correct_update_1_wrong_update_return_1_correct_update():
     updates = """22,33
 44,55"""
 
-    assert filter_correct_updates(updates, {33: (22,), 44: (55,)}) == ((44, 55),)
+    assert filter_correct_and_incorrect_updates(updates, {33: (22,), 44: (55,)}) == {
+        "correct": ((44, 55),),
+        "incorrect": ((33, 22),),
+    }
 
 
 def test_filter_2_correct_updates_return_2_correct_updates():
     updates = """22,33
 44,55"""
 
-    assert filter_correct_updates(updates, {22: (33,), 44: (55,)}) == ((22, 33), (44, 55))
+    assert filter_correct_and_incorrect_updates(updates, {22: (33,), 44: (55,)}) == {
+        "correct": (
+            (22, 33),
+            (44, 55),
+        ),
+        "incorrect": (),
+    }
 
 
 def test_filter_1_update_without_matching_rule_return_1_correct_update():
     updates = """22,33"""
 
-    assert filter_correct_updates(updates, {44: (55,)}) == ((22, 33),)
+    assert filter_correct_and_incorrect_updates(updates, {44: (55,)}) == {
+        "correct": ((22, 33),),
+        "incorrect": (),
+    }
 
 
 def test_get_dict_ordering_rules_input_ordering_rules_is_str():
