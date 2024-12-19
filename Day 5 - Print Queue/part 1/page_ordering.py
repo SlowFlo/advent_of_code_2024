@@ -28,7 +28,21 @@ def filter_correct_updates(updates: str, dict_ordering_rules: dict[int, tuple[in
     if not isinstance(dict_ordering_rules, dict):
         raise TypeError("The ordering rules must be a dict")
 
-    return ()
+    if not updates.strip():
+        return ()
+
+    update = tuple(map(int, updates.splitlines()[0].split(",")))
+
+    seen_pages = []
+    for page_number in update:
+        rules = dict_ordering_rules.get(page_number, ())
+        for must_be_before_page in rules:
+            if must_be_before_page in seen_pages:
+                return ()
+
+        seen_pages.append(page_number)
+
+    return (tuple(seen_pages),)
 
 
 def get_correctly_ordered_updates(ordering_rules: str, updates: str):
