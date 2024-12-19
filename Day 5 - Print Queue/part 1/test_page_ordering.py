@@ -3,7 +3,8 @@ import pytest
 from page_ordering import (
     get_sum_middle_pages_of_correctly_ordered_updates,
     get_correctly_ordered_updates,
-    get_dict_ordering_rules, filter_correct_updates,
+    get_dict_ordering_rules,
+    filter_correct_updates,
 )
 
 

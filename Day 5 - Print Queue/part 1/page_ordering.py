@@ -21,6 +21,14 @@ def get_dict_ordering_rules(ordering_rules: str) -> dict[int, tuple[int]]:
     return dict_ordering_rules
 
 
+def filter_correct_updates(updates: str, dict_ordering_rules: dict[int, tuple[int]]):
+    if not isinstance(updates, str):
+        raise TypeError("The rules must be a string")
+
+    if not isinstance(dict_ordering_rules, dict):
+        raise TypeError("The updates must be a string")
+
+
 def get_correctly_ordered_updates(ordering_rules: str, updates: str):
     if not isinstance(ordering_rules, str):
         raise TypeError("The rules must be a string")
@@ -28,7 +36,9 @@ def get_correctly_ordered_updates(ordering_rules: str, updates: str):
     if not isinstance(updates, str):
         raise TypeError("The updates must be a string")
 
-    get_dict_ordering_rules(ordering_rules)
+    dict_ordering_rules = get_dict_ordering_rules(ordering_rules)
+
+    return filter_correct_updates(updates, dict_ordering_rules)
 
 
 def get_sum_middle_pages_of_correctly_ordered_updates(ordering_rules_and_updates: str) -> int:
