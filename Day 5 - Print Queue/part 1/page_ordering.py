@@ -26,7 +26,7 @@ def filter_correct_updates(updates: str, dict_ordering_rules: dict[int, tuple[in
         raise TypeError("The rules must be a string")
 
     if not isinstance(dict_ordering_rules, dict):
-        raise TypeError("The updates must be a string")
+        raise TypeError("The ordering rules must be a dict")
 
 
 def get_correctly_ordered_updates(ordering_rules: str, updates: str):
