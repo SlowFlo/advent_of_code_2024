@@ -3,7 +3,7 @@ import pytest
 from page_ordering import (
     get_sum_middle_pages_of_correctly_ordered_updates,
     get_correctly_ordered_updates,
-    get_dict_ordering_rules,
+    get_dict_ordering_rules, filter_correct_updates,
 )
 
 
@@ -20,6 +20,16 @@ def test_get_correctly_ordered_updates_input_ordering_rules_is_str():
 def test_get_correctly_ordered_updates_input_updates_is_str():
     with pytest.raises(TypeError):
         get_correctly_ordered_updates("zersq", 12)
+
+
+def test_filter_correct_updates_input_updates_is_str():
+    with pytest.raises(TypeError):
+        filter_correct_updates(1.2, "dszqf")
+
+
+def test_filter_correct_updates_input_dict_ordering_rules_is_dict():
+    with pytest.raises(TypeError):
+        filter_correct_updates("1.2", "dszqf")
 
 
 def test_get_dict_ordering_rules_input_ordering_rules_is_str():
