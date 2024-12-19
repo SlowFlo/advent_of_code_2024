@@ -75,7 +75,11 @@ def get_sum_middle_pages_of_correctly_ordered_updates(ordering_rules_and_updates
 
     correctly_ordered_updates = get_correctly_ordered_updates(ordering_rules, updates)
 
-    return 143
+    middle_page_sum = 0
+    for correct_update in correctly_ordered_updates:
+        middle_page_sum += correct_update[len(correct_update) // 2]
+
+    return middle_page_sum
 
 
 if __name__ == "__main__":
