@@ -21,6 +21,10 @@ def get_dict_ordering_rules(ordering_rules: str) -> dict[int, tuple[int]]:
     return dict_ordering_rules
 
 
+class IncorrectUpdateError(Exception):
+    pass
+
+
 def filter_correct_updates(updates: str, dict_ordering_rules: dict[int, tuple[int]]) -> tuple:
     if not isinstance(updates, str):
         raise TypeError("The rules must be a string")
@@ -31,17 +35,24 @@ def filter_correct_updates(updates: str, dict_ordering_rules: dict[int, tuple[in
     if not updates.strip():
         return ()
 
-    update = tuple(map(int, updates.splitlines()[0].split(",")))
+    correct_updates = []
+    for str_update in updates.splitlines():
+        update = tuple(map(int, str_update.split(",")))
 
-    seen_pages = []
-    for page_number in update:
-        rules = dict_ordering_rules.get(page_number, ())
-        if any(must_be_before_page in seen_pages for must_be_before_page in rules):
-            return ()
+        seen_pages = []
+        try:
+            for page_number in update:
+                rules = dict_ordering_rules.get(page_number, ())
+                if any(must_be_before_page in seen_pages for must_be_before_page in rules):
+                    raise IncorrectUpdateError()
 
-        seen_pages.append(page_number)
+                seen_pages.append(page_number)
+        except IncorrectUpdateError:
+            pass
+        else:
+            correct_updates.append(tuple(seen_pages))
 
-    return (tuple(seen_pages),)
+    return tuple(correct_updates)
 
 
 def get_correctly_ordered_updates(ordering_rules: str, updates: str):
