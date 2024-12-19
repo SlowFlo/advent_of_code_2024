@@ -28,6 +28,8 @@ def filter_correct_updates(updates: str, dict_ordering_rules: dict[int, tuple[in
     if not isinstance(dict_ordering_rules, dict):
         raise TypeError("The ordering rules must be a dict")
 
+    return ()
+
 
 def get_correctly_ordered_updates(ordering_rules: str, updates: str):
     if not isinstance(ordering_rules, str):
