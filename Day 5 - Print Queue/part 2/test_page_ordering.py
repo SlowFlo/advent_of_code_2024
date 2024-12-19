@@ -34,15 +34,15 @@ def test_filter_correct_and_incorrect_updates_input_dict_ordering_rules_is_dict(
 
 
 def test_filter_correct_and_incorrect_updates_empty_inputs_return_empty_tuple():
-    assert filter_correct_and_incorrect_updates("", {}) == {"correct": (), "incorrect": ()}
+    assert filter_correct_and_incorrect_updates("", {}) == {"correct": [], "incorrect": []}
 
 
 def test_filter_correct_and_incorrect_updates_wrong_update_return_empty_tuple():
-    assert filter_correct_and_incorrect_updates("11,10", {10: (11,)}) == {"correct": (), "incorrect": ((10, 11),)}
+    assert filter_correct_and_incorrect_updates("11,10", {10: (11,)}) == {"correct": [], "incorrect": [(10, 11)]}
 
 
 def test_filter_correct_and_incorrect_updates_correct_update_returned_in_tuple():
-    assert filter_correct_and_incorrect_updates("10,11", {10: (11,)}) == {"correct": ((10, 11),), "incorrect": ()}
+    assert filter_correct_and_incorrect_updates("10,11", {10: (11,)}) == {"correct": [(10, 11)], "incorrect": []}
 
 
 def test_filter_1_correct_update_1_wrong_update_return_1_correct_update():
@@ -50,8 +50,8 @@ def test_filter_1_correct_update_1_wrong_update_return_1_correct_update():
 44,55"""
 
     assert filter_correct_and_incorrect_updates(updates, {33: (22,), 44: (55,)}) == {
-        "correct": ((44, 55),),
-        "incorrect": ((33, 22),),
+        "correct": [(44, 55)],
+        "incorrect": [(33, 22)],
     }
 
 
@@ -60,11 +60,8 @@ def test_filter_2_correct_updates_return_2_correct_updates():
 44,55"""
 
     assert filter_correct_and_incorrect_updates(updates, {22: (33,), 44: (55,)}) == {
-        "correct": (
-            (22, 33),
-            (44, 55),
-        ),
-        "incorrect": (),
+        "correct": [(22, 33), (44, 55)],
+        "incorrect": [],
     }
 
 
@@ -72,8 +69,8 @@ def test_filter_1_update_without_matching_rule_return_1_correct_update():
     updates = """22,33"""
 
     assert filter_correct_and_incorrect_updates(updates, {44: (55,)}) == {
-        "correct": ((22, 33),),
-        "incorrect": (),
+        "correct": [(22, 33)],
+        "incorrect": [],
     }
 
 
