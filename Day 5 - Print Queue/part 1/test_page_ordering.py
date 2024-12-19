@@ -59,6 +59,12 @@ def test_filter_2_correct_updates_return_2_correct_updates():
     assert filter_correct_updates(updates, {22: (33,), 44: (55,)}) == ((22, 33), (44, 55))
 
 
+def test_filter_1_update_without_matching_rule_return_1_correct_update():
+    updates = """22,33"""
+
+    assert filter_correct_updates(updates, {44: (55,)}) == ((22, 33),)
+
+
 def test_get_dict_ordering_rules_input_ordering_rules_is_str():
     with pytest.raises(TypeError):
         get_dict_ordering_rules(None)
