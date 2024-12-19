@@ -37,6 +37,10 @@ def test_filter_correct_updates_empty_inputs_return_empty_tuple():
     assert filter_correct_updates("", {}) == ()
 
 
+def test_filter_correct_updates_wrong_update_return_empty_tuple():
+    assert filter_correct_updates("11,10", {10: (11,)}) == ()
+
+
 def test_get_dict_ordering_rules_input_ordering_rules_is_str():
     with pytest.raises(TypeError):
         get_dict_ordering_rules(None)

@@ -21,7 +21,7 @@ def get_dict_ordering_rules(ordering_rules: str) -> dict[int, tuple[int]]:
     return dict_ordering_rules
 
 
-def filter_correct_updates(updates: str, dict_ordering_rules: dict[int, tuple[int]]):
+def filter_correct_updates(updates: str, dict_ordering_rules: dict[int, tuple[int]]) -> tuple:
     if not isinstance(updates, str):
         raise TypeError("The rules must be a string")
 
