@@ -34,7 +34,7 @@ def test_filter_correct_and_incorrect_updates_input_dict_ordering_rules_is_dict(
 
 
 def test_filter_correct_and_incorrect_updates_empty_inputs_return_empty_tuple():
-    assert filter_correct_and_incorrect_updates("", {}) == ()
+    assert filter_correct_and_incorrect_updates("", {}) == {"correct": (), "incorrect": ()}
 
 
 def test_filter_correct_and_incorrect_updates_wrong_update_return_empty_tuple():
