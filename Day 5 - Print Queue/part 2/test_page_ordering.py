@@ -5,6 +5,7 @@ from page_ordering import (
     get_correctly_and_incorrectly_ordered_updates,
     get_dict_ordering_rules,
     filter_correct_and_incorrect_updates,
+    sorted_incorrect_update,
 )
 
 
@@ -104,6 +105,45 @@ def test_get_dict_ordering_rules_of_2_correct_rules_same_first_number_return_cor
 47|56"""
 
     assert get_dict_ordering_rules(rules) == {47: (53, 56)}
+
+
+def test_sorted_incorrect_update_one_incorrect_page_at_the_beginning_is_sorted_correctly():
+    dict_ordering_rules = {
+        29: (13,),
+        47: (53, 13, 61, 29),
+        53: (29, 13),
+        61: (13, 53, 29),
+        75: (29, 53, 47, 61, 13),
+        97: (13, 61, 47, 29, 53, 75),
+    }
+
+    assert sorted_incorrect_update([75, 97, 47, 61, 53], dict_ordering_rules) == [97, 75, 47, 61, 53]
+
+
+def test_sorted_incorrect_update_one_incorrect_page_at_the_end_is_sorted_correctly():
+    dict_ordering_rules = {
+        29: (13,),
+        47: (53, 13, 61, 29),
+        53: (29, 13),
+        61: (13, 53, 29),
+        75: (29, 53, 47, 61, 13),
+        97: (13, 61, 47, 29, 53, 75),
+    }
+
+    assert sorted_incorrect_update([61, 13, 29], dict_ordering_rules) == [61, 29, 13]
+
+
+def test_sorted_incorrect_update_multiple_incorrect_pages_is_sorted_correctly():
+    dict_ordering_rules = {
+        29: (13,),
+        47: (53, 13, 61, 29),
+        53: (29, 13),
+        61: (13, 53, 29),
+        75: (29, 53, 47, 61, 13),
+        97: (13, 61, 47, 29, 53, 75),
+    }
+
+    assert sorted_incorrect_update([97, 13, 75, 29, 47], dict_ordering_rules) == [97, 75, 47, 29, 13]
 
 
 def test_use_case_dict_rules_is_correct():

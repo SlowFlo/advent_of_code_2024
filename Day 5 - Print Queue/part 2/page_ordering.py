@@ -21,7 +21,7 @@ def get_dict_ordering_rules(ordering_rules: str) -> dict[int, tuple[int]]:
     return dict_ordering_rules
 
 
-def sort_incorrect_updates(pages, dict_ordering_rules):
+def sorted_incorrect_update(pages: list[int], dict_ordering_rules) -> list[int]:
     def priority(val):
         visited = set()
         stack = [val]
@@ -65,7 +65,7 @@ def filter_correct_and_incorrect_updates(
             seen_pages.append(page_number)
 
         if insert_key == "incorrect":
-            seen_pages = sort_incorrect_updates(seen_pages, dict_ordering_rules)
+            seen_pages = sorted_incorrect_update(seen_pages, dict_ordering_rules)
 
         correct_and_incorrect_updates[insert_key].append(tuple(seen_pages))
 
