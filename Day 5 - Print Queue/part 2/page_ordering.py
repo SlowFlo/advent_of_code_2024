@@ -21,41 +21,58 @@ def get_dict_ordering_rules(ordering_rules: str) -> dict[int, tuple[int]]:
     return dict_ordering_rules
 
 
-class IncorrectUpdateError(Exception):
-    pass
+def sort_incorrect_updates(pages, dict_ordering_rules):
+    def priority(val):
+        visited = set()
+        stack = [val]
+        priorite_val = 0
+        while stack:
+            current = stack.pop()
+            if current not in visited:
+                visited.add(current)
+                priorite_val += 1
+                if current in dict_ordering_rules:
+                    stack.extend(dict_ordering_rules[current])
+        return priorite_val
+
+    return sorted(pages, key=lambda x: (-priority(x), -x))
 
 
-def filter_correct_updates(updates: str, dict_ordering_rules: dict[int, tuple[int]]) -> tuple:
+def filter_correct_and_incorrect_updates(
+    updates: str, dict_ordering_rules: dict[int, tuple[int]]
+) -> dict[str, list[tuple[int]]]:
     if not isinstance(updates, str):
         raise TypeError("The rules must be a string")
 
     if not isinstance(dict_ordering_rules, dict):
         raise TypeError("The ordering rules must be a dict")
 
-    if not updates.strip():
-        return ()
+    correct_and_incorrect_updates = {"correct": [], "incorrect": []}
 
-    correct_updates = []
+    if not updates.strip():
+        return correct_and_incorrect_updates
+
     for str_update in updates.splitlines():
+        insert_key = "correct"
         update = tuple(map(int, str_update.split(",")))
 
         seen_pages = []
-        try:
-            for page_number in update:
-                rules = dict_ordering_rules.get(page_number, ())
-                if any(must_be_before_page in seen_pages for must_be_before_page in rules):
-                    raise IncorrectUpdateError()
+        for page_number in update:
+            rules = dict_ordering_rules.get(page_number, ())
+            if any(must_be_before_page in seen_pages for must_be_before_page in rules):
+                insert_key = "incorrect"
 
-                seen_pages.append(page_number)
-        except IncorrectUpdateError:
-            pass
-        else:
-            correct_updates.append(tuple(seen_pages))
+            seen_pages.append(page_number)
 
-    return tuple(correct_updates)
+        if insert_key == "incorrect":
+            seen_pages = sort_incorrect_updates(seen_pages, dict_ordering_rules)
+
+        correct_and_incorrect_updates[insert_key].append(tuple(seen_pages))
+
+    return correct_and_incorrect_updates
 
 
-def get_correctly_ordered_updates(ordering_rules: str, updates: str):
+def get_correctly_and_incorrectly_ordered_updates(ordering_rules: str, updates: str) -> dict[str, list[tuple[int]]]:
     if not isinstance(ordering_rules, str):
         raise TypeError("The rules must be a string")
 
@@ -64,32 +81,40 @@ def get_correctly_ordered_updates(ordering_rules: str, updates: str):
 
     dict_ordering_rules = get_dict_ordering_rules(ordering_rules)
 
-    return filter_correct_updates(updates, dict_ordering_rules)
+    return filter_correct_and_incorrect_updates(updates, dict_ordering_rules)
 
 
-def get_sum_middle_pages_of_correctly_ordered_updates(ordering_rules_and_updates: str) -> int:
+def get_sum_middle_pages_of_correctly_and_incorrectly_ordered_updates(
+    ordering_rules_and_updates: str,
+) -> tuple[int, int]:
     if not isinstance(ordering_rules_and_updates, str):
         raise TypeError("The rules and updates must be a string")
 
     ordering_rules, updates = ordering_rules_and_updates.split("\n\n")
 
-    correctly_ordered_updates = get_correctly_ordered_updates(ordering_rules, updates)
+    updates = get_correctly_and_incorrectly_ordered_updates(ordering_rules, updates)
 
-    middle_page_sum = 0
-    for correct_update in correctly_ordered_updates:
-        middle_page_sum += correct_update[len(correct_update) // 2]
+    correctly_ordered_sum = 0
+    for correct_update in updates["correct"]:
+        correctly_ordered_sum += correct_update[len(correct_update) // 2]
 
-    return middle_page_sum
+    incorrectly_ordered_sum = 0
+    for incorrect_update in updates["incorrect"]:
+        incorrectly_ordered_sum += incorrect_update[len(incorrect_update) // 2]
+
+    return correctly_ordered_sum, incorrectly_ordered_sum
 
 
 if __name__ == "__main__":
     start_time = time.time()
     with open("puzzle_input.txt") as f:
         letters_grid = f.read()
-        print(
-            "Sum of the correct updates middle pages numbers:",
-            get_sum_middle_pages_of_correctly_ordered_updates(letters_grid),
+        correctly_ordered_sum, incorrectly_ordered_sum = (
+            get_sum_middle_pages_of_correctly_and_incorrectly_ordered_updates(letters_grid)
         )
+
+        print("Sum of the correct updates middle pages numbers:", correctly_ordered_sum)
+        print("Sum of the incorrect updates middle pages numbers:", incorrectly_ordered_sum)
 
     end_time = time.time()
     execution_time = end_time - start_time
