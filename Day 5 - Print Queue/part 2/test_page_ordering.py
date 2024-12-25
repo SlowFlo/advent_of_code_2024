@@ -107,6 +107,19 @@ def test_get_dict_ordering_rules_of_2_correct_rules_same_first_number_return_cor
     assert get_dict_ordering_rules(rules) == {47: (53, 56)}
 
 
+def test_sorted_incorrect_update_one_duplicate_page_is_sorted_correctly():
+    dict_ordering_rules = {
+        29: (13,),
+        47: (53, 13, 61, 29),
+        53: (29, 13),
+        61: (13, 53, 29),
+        75: (29, 53, 47, 61, 13),
+        97: (13, 61, 47, 29, 53, 75),
+    }
+
+    assert sorted_incorrect_update([47, 97, 47, 61, 53], dict_ordering_rules) == [97, 47, 47, 61, 53]
+
+
 def test_sorted_incorrect_update_one_incorrect_page_at_the_beginning_is_sorted_correctly():
     dict_ordering_rules = {
         29: (13,),
